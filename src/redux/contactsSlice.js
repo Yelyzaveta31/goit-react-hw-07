@@ -3,7 +3,7 @@ import {
   fetchContactsThunk,
   addContactsThunk,
   deleteContactsThunk,
-} from "./operations";
+} from "./contactsOps.js";
 
 const initialState = {
   items: [
@@ -14,6 +14,9 @@ const initialState = {
   ],
   isLoading: false,
   error: null,
+  filters: {
+    name: "",
+  },
 };
 
 const contactsSlice = createSlice({

@@ -3,7 +3,7 @@ import s from "./ContactForm.module.css";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { addContactsThunk, fetchContactsThunk } from "../../redux/operations";
+import { addContactsThunk, fetchContactsThunk } from "../../redux/contactsOps";
 
 const FeedbackSchema = Yup.object().shape({
   name: Yup.string()
