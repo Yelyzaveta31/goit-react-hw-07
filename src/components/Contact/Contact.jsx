@@ -2,6 +2,7 @@ import { FaUser } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
 import s from "./Contact.module.css";
 import { useDispatch } from "react-redux";
+import { deleteContactsThunk } from "../../redux/operations";
 
 const Contact = ({ item }) => {
   const dispatch = useDispatch();
@@ -18,7 +19,10 @@ const Contact = ({ item }) => {
             <span className={s.contact_span}>{item.number}</span>
           </p>
         </div>
-        <button className={s.button} onClick={() => dispatch(item.id)}>
+        <button
+          className={s.button}
+          onClick={() => dispatch(deleteContactsThunk(item.id))}
+        >
           Delete
         </button>
       </li>
