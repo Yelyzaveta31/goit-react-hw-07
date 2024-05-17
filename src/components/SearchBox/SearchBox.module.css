@@ -1,0 +1,16 @@
+.boxInput {
+  border: none;
+  outline: none;
+  width: 300px;
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.boxContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-left: 40px;
+}
