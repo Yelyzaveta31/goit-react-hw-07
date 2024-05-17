@@ -4,7 +4,8 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { addContactsThunk, fetchContactsThunk } from "../../redux/contactsOps";
-import { selectIsError, selectIsLoading } from "../../redux/contactsSlice";
+import { selectIsLoading } from "../../redux/contactsSlice";
+import Loader from "../Loader/Loader";
 
 const FeedbackSchema = Yup.object().shape({
   name: Yup.string()
@@ -24,7 +25,6 @@ const ContactForm = () => {
     number: "",
   };
   const isLoading = useSelector(selectIsLoading);
-  const isError = useSelector(selectIsError);
 
   useEffect(() => {
     dispatch(fetchContactsThunk());
@@ -34,29 +34,32 @@ const ContactForm = () => {
     dispatch(addContactsThunk(values));
     actions.resetForm();
   };
+
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={handleSubmit}
-      validationSchema={FeedbackSchema}
-    >
-      <Form className={s.form}>
-        <label className={s.form_list} htmlFor="name">
-          Name
-        </label>
-        <Field type="text" name="name" id="name" />
-        <ErrorMessage className={s.error} name="name" component="span" />
-        <label className={s.form_list} htmlFor="number">
-          Number
-        </label>
-        <Field type="number" name="number" id="number" />
-        <ErrorMessage className={s.error} name="number" component="span" />
-        <button className={s.button} type="submit">
-          Add contact
-        </button>
-      </Form>
+    <>
       {isLoading && <Loader />}
-    </Formik>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+        validationSchema={FeedbackSchema}
+      >
+        <Form className={s.form}>
+          <label className={s.form_list} htmlFor="name">
+            Name
+          </label>
+          <Field type="text" name="name" id="name" />
+          <ErrorMessage className={s.error} name="name" component="span" />
+          <label className={s.form_list} htmlFor="number">
+            Number
+          </label>
+          <Field type="number" name="number" id="number" />
+          <ErrorMessage className={s.error} name="number" component="span" />
+          <button className={s.button} type="submit">
+            Add contact
+          </button>
+        </Form>
+      </Formik>
+    </>
   );
 };
 
