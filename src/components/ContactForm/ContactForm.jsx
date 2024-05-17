@@ -1,9 +1,10 @@
 import { Field, Form, Formik, ErrorMessage } from "formik";
 import s from "./ContactForm.module.css";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { addContactsThunk, fetchContactsThunk } from "../../redux/contactsOps";
+import { selectIsError, selectIsLoading } from "../../redux/contactsSlice";
 
 const FeedbackSchema = Yup.object().shape({
   name: Yup.string()
@@ -22,6 +23,8 @@ const ContactForm = () => {
     name: "",
     number: "",
   };
+  const isLoading = useSelector(selectIsLoading);
+  const isError = useSelector(selectIsError);
 
   useEffect(() => {
     dispatch(fetchContactsThunk());
@@ -52,6 +55,7 @@ const ContactForm = () => {
           Add contact
         </button>
       </Form>
+      {isLoading && <Loader />}
     </Formik>
   );
 };
